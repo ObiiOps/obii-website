@@ -9,3 +9,5 @@ There is no analytics or product instrumentation in this repo: no PostHog, Googl
 # Notes
 
 Please don't add posthog yet, or if you do - look at the current site's implementation. Importantly, cta_clicked needs to be setup, and some other modification should be made so we can see the traffic from old site to new.
+
+testing if I can publish
