@@ -1,0 +1,170 @@
+/*
+ * Motion layer for the site pages. Everything here is additive: with these
+ * rules removed (or with reduced motion requested) the pages render exactly
+ * as the static design.
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+	/* Page-to-page cross-fade (browsers without support navigate normally). */
+	@view-transition {
+		navigation: auto;
+	}
+
+	::view-transition-old(root) {
+		animation: page-out 0.18s ease both;
+	}
+
+	::view-transition-new(root) {
+		animation: page-in 0.36s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.header {
+		view-transition-name: site-header;
+	}
+
+	@keyframes page-out {
+		to {
+			opacity: 0;
+		}
+	}
+
+	@keyframes page-in {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+	}
+
+	/* Scroll reveal. `data-reveal` is only ever set by script on blocks that
+	   start below the fold, so nothing is hidden without JavaScript. */
+	[data-reveal] {
+		opacity: 0;
+		translate: 0 24px;
+	}
+
+	[data-reveal].is-revealed {
+		opacity: 1;
+		translate: 0 0;
+		transition:
+			opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),
+			translate 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+	}
+
+	/* Mobile menu. */
+	.menu > .menu-panel {
+		transform-origin: top right;
+	}
+
+	.menu[open] > .menu-panel {
+		animation: menu-in 0.24s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.menu.is-closing > .menu-panel {
+		animation: menu-out 0.16s ease both;
+	}
+
+	@keyframes menu-in {
+		from {
+			opacity: 0;
+			translate: 0 -8px;
+			scale: 0.96;
+		}
+	}
+
+	@keyframes menu-out {
+		to {
+			opacity: 0;
+			translate: 0 -6px;
+			scale: 0.97;
+		}
+	}
+
+	/* Buttons, links and cards. */
+	.btn {
+		transition:
+			translate 0.2s ease,
+			box-shadow 0.2s ease,
+			filter 0.2s ease;
+	}
+
+	.btn > span {
+		transition: translate 0.2s ease;
+	}
+
+	.navlinks a,
+	.signin,
+	.footer-nav a,
+	.footerlinks a,
+	.menu-panel a {
+		transition:
+			color 0.2s ease,
+			opacity 0.2s ease,
+			border-color 0.2s ease;
+	}
+
+	.info-card,
+	.person-card,
+	.price-card,
+	.bencard,
+	.reassure-card,
+	.company,
+	.personcard,
+	.compare-card,
+	.howstep,
+	.plan,
+	.faq-list details {
+		transition:
+			translate 0.25s ease,
+			box-shadow 0.25s ease,
+			border-color 0.25s ease;
+	}
+
+	@media (hover: hover) {
+		.btn:hover {
+			translate: 0 -2px;
+			filter: brightness(1.07);
+		}
+
+		.btn:hover > span {
+			translate: 3px 0;
+		}
+
+		.btn:active {
+			translate: 0 0;
+		}
+
+		.navlinks a:hover,
+		.signin:hover,
+		.footer-nav a:hover,
+		.footerlinks a:hover,
+		.menu-panel a:hover {
+			color: #fff;
+			opacity: 1;
+		}
+
+		.info-card:hover,
+		.person-card:hover,
+		.price-card:hover,
+		.bencard:hover,
+		.reassure-card:hover,
+		.company:hover,
+		.personcard:hover,
+		.compare-card:hover,
+		.howstep:hover,
+		.plan:hover {
+			translate: 0 -4px;
+			box-shadow: 0 20px 46px rgba(21, 29, 88, 0.14);
+		}
+
+		.faq-list details:hover {
+			border-color: #c5c9ee;
+		}
+	}
+}
+
+@media print {
+	[data-reveal] {
+		opacity: 1;
+		translate: none;
+	}
+}

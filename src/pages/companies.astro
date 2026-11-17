@@ -1,0 +1,61 @@
+---
+import SubPage from '../layouts/SubPage.astro';
+import { appRegisterUrl } from '../lib/app';
+
+const title = "Companies | OBII";
+const description = "Research what identifiable market experts have said about the shares you follow, from BHP and CBA to the companies on your own watchlist. Find the context and original source in OBII.";
+---
+
+<SubPage title={title} description={description}>
+	<section slot="hero" class="hero"><div class="wrap hero-grid"><div><div class="eyebrow light">COMPANIES & STOCK INTELLIGENCE</div>
+	<h1>Your companies. <em>Expert perspectives.</em></h1><p class="lede">Research what identifiable market experts have said about the shares you follow, from BHP and CBA to the companies on your own watchlist. Find the context and original source in OBII.</p><div class="hero-actions"><a class="btn" href={appRegisterUrl}>Try OBII free for 7 days <span>→</span></a><a class="btn ghost" href="/">Explore OBII</a></div>
+	<p class="promise">7 days free · No credit card required · Your choice to subscribe</p><div class="mini-proof"><span>Real expert perspectives</span><span>Original sources</span><span>Your decision</span></div>
+	</div>
+	<div class="hero-art"><div class="panel"><div class="panelhead"><span class="chip">COMPANY RESEARCH</span><span class="tiny">Follow the shares that matter</span></div>
+	<div class="searchfield">⌕ &nbsp; Search by ASX code or company name</div>
+	<div style="display:grid;gap:9px;margin-top:13px"><div class="sourcecard"><div class="row-flex"><div class="bhp">BHP</div>
+	<div><strong>BHP Group</strong><p>ASX:BHP</p></div>
+	</div>
+	<span class="source-link">Explore →</span></div>
+	<div class="sourcecard"><div class="row-flex"><span class="chip">CBA</span><div><strong>Commonwealth Bank</strong><p>ASX:CBA</p></div>
+	</div>
+	<span class="source-link">Explore →</span></div>
+	<div class="sourcecard"><div class="row-flex"><span class="chip">CSL</span><div><strong>CSL</strong><p>ASX:CSL</p></div>
+	</div>
+	<span class="source-link">Explore →</span></div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</section>
+	<main><section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">BUILT AROUND YOUR SHARES</div>
+	<h2>Start with a company, not an endless feed.</h2><p>A focused research experience for self-directed investors who already know the shares they care about.</p></div>
+	<div class="cols3"><article class="info-card"><div class="iconbox">⌕</div>
+	<h3>Look up a company</h3><p>Search by listed company name or code, then explore related expert commentary.</p></article>
+	<article class="info-card"><div class="iconbox">▤</div>
+	<h3>Explore the record</h3><p>See available reasoning and follow links back to the original dated sources.</p></article>
+	<article class="info-card"><div class="iconbox">↻</div>
+	<h3>Come back every few days</h3><p>Return to the shares you follow as fresh expert perspectives become available.</p></article>
+	</div>
+	</div>
+	</section>
+	<section class="section alt"><div class="wrap demo-row"><div class="demo-copy"><div class="eyebrow">WATCHLISTS</div>
+	<h2>Your companies, organised around you.</h2><p>Keep your research focused. Standard includes one watchlist of up to ten stocks; Pro includes four watchlists of up to ten stocks each.</p><ul class="checklist"><li><span class="check">✓</span>Follow the companies relevant to you</li><li><span class="check">✓</span>Research new commentary when it appears</li><li><span class="check">✓</span>Keep source links close to the research</li></ul>
+	<a class="btn dark" href="/pricing">Compare the plans →</a></div>
+	<div class="demo-panel"><div class="panel"><div class="panelhead"><strong>My watchlist</strong><span class="chip">Research view</span></div>
+	<div class="sourcecard"><div><strong>BHP Group</strong><p>ASX:BHP · Commentary & source links</p></div>
+	<span class="source-link">→</span></div>
+	<div class="sourcecard" style="margin-top:10px"><div><strong>Commonwealth Bank</strong><p>ASX:CBA · Commentary & source links</p></div>
+	<span class="source-link">→</span></div>
+	<div class="sourcecard" style="margin-top:10px"><div><strong>CSL</strong><p>ASX:CSL · Commentary & source links</p></div>
+	<span class="source-link">→</span></div>
+	</div>
+	</div>
+	</div>
+	</section>
+	<section class="section small"><div class="wrap"><div class="cta-panel"><div><h2>Know the shares. Explore the thinking.</h2><p>Start with one company you follow and see whether OBII belongs in your research routine.</p></div>
+	<a class="btn" href={appRegisterUrl}>Try OBII free for 7 days →</a></div>
+	</div>
+	</section>
+	</main>
+</SubPage>

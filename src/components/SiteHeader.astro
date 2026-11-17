@@ -1,0 +1,26 @@
+---
+import { appLoginUrl, appRegisterUrl } from '../lib/app';
+import { NAV_LINKS, normalisePath } from '../lib/nav';
+
+const currentPath = normalisePath(Astro.url.pathname);
+---
+
+<header class="header">
+	<div class="wrap navrow">
+		<a href="/" class="brand"><img src="/images/obii_logo.png" alt="OBII" /></a>
+		<nav class="navlinks" aria-label="Primary navigation">
+			{NAV_LINKS.map((link) => <a class={link.href === currentPath ? 'active' : ''} href={link.href}>{link.label}</a>)}
+		</nav>
+		<div class="navactions">
+			<a class="signin" href={appLoginUrl}>Log in</a>
+			<a class="btn small" href={appRegisterUrl}>Try OBII free for 7 days <span>→</span></a>
+			<details class="menu">
+				<summary aria-label="Open menu">☰</summary>
+				<div class="menu-panel">
+					{NAV_LINKS.map((link) => <a href={link.href}>{link.label}</a>)}
+					<a href={appLoginUrl}>Log in</a>
+				</div>
+			</details>
+		</div>
+	</div>
+</header>

@@ -1,0 +1,17 @@
+---
+import { appLoginUrl } from '../lib/app';
+import { NAV_LINKS } from '../lib/nav';
+---
+
+<footer class="ftr">
+	<div class="wrap">
+		<div class="footer-row">
+			<a href="/"><img src="/images/obii_logo.png" alt="OBII" /></a>
+			<div class="footer-nav">
+				{NAV_LINKS.map((link) => <a href={link.href}>{link.label}</a>)}
+				<a href={appLoginUrl}>Log in</a>
+			</div>
+		</div>
+		<p class="footer-legal">OBII helps independent investors research source-linked expert commentary. Content is general information, not personal financial advice.</p>
+	</div>
+</footer>

@@ -1,0 +1,76 @@
+---
+import SubPage from '../layouts/SubPage.astro';
+import { appRegisterUrl } from '../lib/app';
+
+const title = "Pricing | OBII";
+const description = "Explore OBII free for seven days with no credit card required. Then choose Standard or Pro only if the tools and expert research earn a place in your routine.";
+---
+
+<SubPage title={title} description={description}>
+	<section slot="hero" class="hero"><div class="wrap hero-grid"><div><div class="eyebrow light">PRICING & MEMBERSHIP</div>
+	<h1>Research first. <em>Decide what’s worth paying for.</em></h1><p class="lede">Explore OBII free for seven days with no credit card required. Then choose Standard or Pro only if the tools and expert research earn a place in your routine.</p><div class="hero-actions"><a class="btn" href={appRegisterUrl}>Try OBII free for 7 days <span>→</span></a><a class="btn ghost" href="/">Explore OBII</a></div>
+	<p class="promise">7 days free · No credit card required · Your choice to subscribe</p><div class="mini-proof"><span>Real expert perspectives</span><span>Original sources</span><span>Your decision</span></div>
+	</div>
+	<div class="hero-art pricing-preview"><div class="panel"><div class="panelhead"><span class="chip">A CLEAR VALUE EXCHANGE</span><span class="tiny">7-day no-card trial</span></div>
+	<div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><div><div class="label">STANDARD</div>
+	<div style="font-size:31px;font-weight:850">A$49.00<span style="font-size:12px;font-weight:600;color:#5d6981"> / month</span></div>
+	</div>
+	<span class="chip">PLUS GST</span></div>
+	<div style="height:1px;background:#e8e9f3;margin:15px 0"></div>
+	<div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><div><div class="label">PRO</div>
+	<div style="font-size:31px;font-weight:850">A$149.00<span style="font-size:12px;font-weight:600;color:#5d6981"> / month</span></div>
+	</div>
+	<span class="chip">PLUS GST</span></div>
+	<p class="tiny" style="margin-top:17px">Trial first. Choose the right plan later.</p></div>
+	</div>
+	</div>
+	</section>
+	<main><section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">TWO MEMBERSHIP OPTIONS</div>
+	<h2>Simple monthly pricing. No guesswork.</h2><p>Both plans bring searchable expert commentary and original sources into one research experience. The difference is how much you follow and which tools you can access.</p></div>
+	<div class="price-grid"><article class="price-card"><div class="eyebrow">START HERE</div>
+	<h3>Standard</h3><div class="price">A$49.00 <span>/ month</span></div>
+	<div class="tiny">GST added at checkout</div>
+	<p class="desc">For investors following a focused set of companies and experts.</p><div class="price-features"><div>Searchable expert interviews and sources</div>
+	<div>1 watchlist, up to 10 stocks</div>
+	<div>Follow up to 20 experts</div>
+	<div>Limited Stock Intelligence / Expert Tracker</div>
+	<div>9,840 monthly research credits</div>
+	</div>
+	<a class="btn light" href={appRegisterUrl}>Start 7-day free trial →</a></article>
+	<article class="price-card featured"><span class="badge">MORE RESEARCH CAPACITY</span><div class="eyebrow">EXPAND YOUR RESEARCH</div>
+	<h3>Pro</h3><div class="price">A$149.00 <span>/ month</span></div>
+	<div class="tiny">GST added at checkout</div>
+	<p class="desc">For investors following more companies, more experts and deeper research.</p><div class="price-features"><div>Everything in Standard</div>
+	<div>4 watchlists, up to 10 stocks each</div>
+	<div>Unlimited expert follows</div>
+	<div>Full Stock Intelligence / Expert Tracker</div>
+	<div>30,000 monthly research credits</div>
+	</div>
+	<a class="btn" href={appRegisterUrl}>Start 7-day free trial →</a></article>
+	</div>
+	</div>
+	</section>
+	<section class="section alt"><div class="wrap"><div class="section-head"><div class="eyebrow">COMPARE IN ONE PLACE</div>
+	<h2>See exactly what changes between plans.</h2><p>An honest feature comparison helps you pick the level of research that fits your routine.</p></div>
+	<table class="compare-table"><thead><tr><th>What’s included</th><th>Standard</th><th>Pro</th></tr>
+	</thead>
+	<tbody><tr><td>Searchable expert interviews</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+	<tr><td>Watchlists</td><td>1 × 10 stocks</td><td>4 × 10 stocks</td></tr>
+	<tr><td>Experts followed</td><td>Up to 20</td><td>Unlimited</td></tr>
+	<tr><td>Stock Intelligence / Expert Tracker</td><td>Limited access</td><td>Full access</td></tr>
+	<tr><td>Monthly research credits</td><td>9,840</td><td>30,000</td></tr>
+	<tr><td>Playlists / folders</td><td>5 / 1</td><td>15 / 5</td></tr>
+	</tbody>
+	</table>
+	</div>
+	</section>
+	<section class="section small"><div class="wrap"><div class="section-head"><div class="eyebrow">THE TRIAL</div>
+	<h2>See the research before you commit.</h2><p>Start seven days free with no credit card. Then decide whether a paid membership is useful enough to keep.</p></div>
+	</div>
+	</section>
+	<section class="section small"><div class="wrap"><div class="cta-panel"><div><h2>Try the research. Make up your own mind.</h2><p>Explore expert perspectives and original sources for seven days without providing a credit card.</p></div>
+	<a class="btn" href={appRegisterUrl}>Try OBII free for 7 days →</a></div>
+	</div>
+	</section>
+	</main>
+</SubPage>

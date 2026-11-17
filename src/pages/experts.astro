@@ -1,0 +1,55 @@
+---
+import SubPage from '../layouts/SubPage.astro';
+import { appRegisterUrl } from '../lib/app';
+
+const title = "Experts | OBII";
+const description = "The value starts with real people. OBII helps you find and research expert perspectives from ausbiz, follow the people you trust and check their original commentary.";
+---
+
+<SubPage title={title} description={description}>
+	<section slot="hero" class="hero"><div class="wrap hero-grid"><div><div class="eyebrow light">EXPERTS & ORIGINAL SOURCES</div>
+	<h1>Follow the people. <em>Not the noise.</em></h1><p class="lede">The value starts with real people. OBII helps you find and research expert perspectives from ausbiz, follow the people you trust and check their original commentary.</p><div class="hero-actions"><a class="btn" href={appRegisterUrl}>Try OBII free for 7 days <span>→</span></a><a class="btn ghost" href="/">Explore OBII</a></div>
+	<p class="promise">7 days free · No credit card required · Your choice to subscribe</p><div class="mini-proof"><span>Real expert perspectives</span><span>Original sources</span><span>Your decision</span></div>
+	</div>
+	<div class="hero-art" style="padding:13px"><div class="people" style="gap:12px"><div style="background:#25235e;border:1px solid #6d67b8;border-radius:15px;overflow:hidden"><div style="height:225px"><img src="/images/nadine.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 30%" alt="Nadine Blayney" /></div>
+	<div style="background:#221d56;padding:12px 15px;color:white;font-size:13px"><strong>Nadine Blayney</strong><div style="font-size:11px;color:#c7c5e7">ausbiz editorial</div>
+	</div>
+	</div>
+	<div style="background:#25235e;border:1px solid #6d67b8;border-radius:15px;overflow:hidden"><div style="height:225px"><img src="/images/kochie.png" style="width:100%;height:100%;object-fit:cover;object-position:center 30%" alt="David Koch" /></div>
+	<div style="background:#221d56;padding:12px 15px;color:white;font-size:13px"><strong>David “Kochie” Koch</strong><div style="font-size:11px;color:#c7c5e7">ausbiz</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</section>
+	<div class="brandstrip"><div class="wrap brandstrip-inner"><img src="/images/ausbiz_logo.png" alt="ausbiz" /><span><strong>Real broadcasters. Real market conversations.</strong> OBII is the research membership built around those perspectives.</span></div>
+	</div>
+	<main><section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">REAL PEOPLE</div>
+	<h2>Recognisable faces. Attributable sources.</h2><p>Meet familiar people from ausbiz, then follow the original expert interviews and sources they bring to market audiences.</p></div>
+	<div class="people"><article class="person-card"><div class="person-photo"><img src="/images/nadine.jpg" alt="Nadine Blayney" /></div>
+	<div><h3>Nadine Blayney</h3><small>ausbiz editorial</small><p>Recognisable ausbiz editorial presence, connecting investors with the market conversation.</p></div>
+	</article>
+	<article class="person-card"><div class="person-photo"><img src="/images/kochie.png" alt="David Koch" /></div>
+	<div><h3>David “Kochie” Koch</h3><small>ausbiz</small><p>A familiar face from the media business behind the expert interviews.</p></div>
+	</article>
+	</div>
+	</div>
+	</section>
+	<section class="section alt"><div class="wrap"><div class="section-head"><div class="eyebrow">OBII EXPERT TRACKER</div>
+	<h2>Research the experts you choose to follow.</h2><p>Find their available views, connect them to relevant companies and return as new source-linked commentary appears.</p></div>
+	<div class="cols3"><article class="info-card"><div class="iconbox">⌕</div>
+	<h3>Find the expert</h3><p>Search a real name and see relevant commentary in the research record.</p></article>
+	<article class="info-card"><div class="iconbox">◎</div>
+	<h3>Follow the people</h3><p>Standard includes up to 20 expert follows. Pro lists unlimited follows.</p></article>
+	<article class="info-card"><div class="iconbox">↗</div>
+	<h3>Check the interview</h3><p>Keep the expert's original words and dated source at the centre of the research.</p></article>
+	</div>
+	</div>
+	</section>
+	<section class="section small"><div class="wrap"><div class="cta-panel"><div><h2>Follow the experts. Keep your own judgement.</h2><p>Research expert views with their context and original sources.</p></div>
+	<a class="btn" href={appRegisterUrl}>Try OBII free for 7 days →</a></div>
+	</div>
+	</section>
+	</main>
+</SubPage>

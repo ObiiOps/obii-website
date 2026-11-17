@@ -1,0 +1,70 @@
+---
+import SubPage from '../layouts/SubPage.astro';
+import { appRegisterUrl } from '../lib/app';
+
+const title = "How it works | OBII";
+const description = "Find what real market experts have said about the shares you follow, explore their reasoning, and check the original dated interviews. You make the decisions.";
+---
+
+<SubPage title={title} description={description}>
+	<section slot="hero" class="hero"><div class="wrap hero-grid"><div><div class="eyebrow light">HOW OBII WORKS</div>
+	<h1>From a market moment to <em>better research.</em></h1><p class="lede">Find what real market experts have said about the shares you follow, explore their reasoning, and check the original dated interviews. You make the decisions.</p><div class="hero-actions"><a class="btn" href={appRegisterUrl}>Try OBII free for 7 days <span>→</span></a><a class="btn ghost" href="/">Explore OBII</a></div>
+	<p class="promise">7 days free · No credit card required · Your choice to subscribe</p><div class="mini-proof"><span>Real expert perspectives</span><span>Original sources</span><span>Your decision</span></div>
+	</div>
+	<div class="hero-art"><div class="panel"><div class="panelhead"><span class="chip">A SIMPLE RESEARCH JOURNEY</span><span class="tiny">3 steps</span></div>
+	<div class="sourcecard"><span class="chip">01 · FIND</span><div><strong>Choose BHP or an expert you follow</strong><p>Search real broadcast commentary</p></div>
+	</div>
+	<div class="sourcecard" style="margin-top:9px"><span class="chip">02 · UNDERSTAND</span><div><strong>Explore the available reasoning</strong><p>See the context behind a view</p></div>
+	</div>
+	<div class="sourcecard" style="margin-top:9px"><span class="chip">03 · VERIFY</span><div><strong>Return to the original source</strong><p>Check the date and full interview</p></div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</section>
+	<div class="brandstrip"><div class="wrap brandstrip-inner"><img src="/images/ausbiz_logo.png" alt="ausbiz" /><span>Hear the conversation on <strong>ausbiz</strong>. Research the thinking with <strong>OBII</strong>.</span></div>
+	</div>
+	<main><section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">THREE SIMPLE BENEFITS</div>
+	<h2>Find. Understand. Verify.</h2><p>A straightforward research journey built around real expert commentary and the companies that matter to you.</p></div>
+	<div class="cols3"><article class="info-card"><div class="number">01 / FIND</div>
+	<div class="iconbox" style="margin-top:18px">⌕</div>
+	<h3>Research a company</h3><p>Search for the shares or experts you already follow. Locate relevant expert views instead of hunting through broadcasts.</p></article>
+	<article class="info-card"><div class="number">02 / UNDERSTAND</div>
+	<div class="iconbox" style="margin-top:18px">▤</div>
+	<h3>Explore the reasoning</h3><p>Look beyond the headline with the explanation and context available in the original commentary.</p></article>
+	<article class="info-card"><div class="number">03 / VERIFY</div>
+	<div class="iconbox" style="margin-top:18px">↗</div>
+	<h3>Go back to the source</h3><p>Inspect the dated interview for yourself. The expert makes the observation. You decide what it means.</p></article>
+	</div>
+	</div>
+	</section>
+	<section class="section alt"><div class="wrap demo-row"><div class="demo-copy"><div class="eyebrow">ONE EXAMPLE</div>
+	<h2>Start with BHP, not another headline.</h2><p>See the available expert commentary on BHP in one research journey, then use the date and original ausbiz interview to check the context.</p><ul class="checklist"><li><span class="check">✓</span>Search by company or expert name</li><li><span class="check">✓</span>Find views linked to original commentary</li><li><span class="check">✓</span>Return as new perspectives become available</li></ul>
+	<a href="/companies" class="btn dark">Explore company research →</a></div>
+	<div class="demo-panel"><div class="panel"><div class="panelhead"><div class="row-flex"><div class="bhp">BHP</div>
+	<div><strong>BHP Group</strong><p class="tiny">ASX:BHP · Example company</p></div>
+	</div>
+	<span class="chip">SOURCE LINKED</span></div>
+	<div class="sourcecard"><div><div class="label">STEP 01</div>
+	<strong>Find relevant expert commentary</strong><p>Search the record by company</p></div>
+	<span class="source-link">Find →</span></div>
+	<div class="sourcecard" style="margin-top:10px"><div><div class="label">STEP 02</div>
+	<strong>Understand the context</strong><p>Explore the reasoning where available</p></div>
+	<span class="source-link">Read →</span></div>
+	<div class="sourcecard" style="margin-top:10px"><div><div class="label">STEP 03</div>
+	<strong>Check the original source</strong><p>Open the dated ausbiz interview</p></div>
+	<span class="source-link">Verify ↗</span></div>
+	</div>
+	</div>
+	</div>
+	</section>
+	<section class="section small"><div class="wrap"><div class="section-head"><div class="eyebrow">REASONS TO RETURN</div>
+	<h2>Useful again when the conversation changes.</h2><p>Come back every few days to research fresh commentary on the companies and experts you follow. Stay informed without giving up control of your decisions.</p></div>
+	</div>
+	</section>
+	<section class="section small"><div class="wrap"><div class="cta-panel"><div><h2>Ready to see the intelligence for yourself?</h2><p>Start with a company you follow. Explore the expert thinking and original sources before choosing a paid plan.</p></div>
+	<a class="btn" href={appRegisterUrl}>Try OBII free for 7 days →</a></div>
+	</div>
+	</section>
+	</main>
+</SubPage>
