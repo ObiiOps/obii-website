@@ -4,11 +4,11 @@ export interface NavLink {
 }
 
 export const NAV_LINKS: readonly NavLink[] = [
-	{ label: 'How it works', href: '/how-it-works' },
-	{ label: 'Experts', href: '/experts' },
-	{ label: 'Companies', href: '/companies' },
-	{ label: 'Pricing', href: '/pricing' },
-	{ label: 'FAQs', href: '/faqs' },
+	{ label: 'How it works', href: '/how-it-works/' },
+	{ label: 'Experts', href: '/experts/' },
+	{ label: 'Companies', href: '/companies/' },
+	{ label: 'Pricing', href: '/pricing/' },
+	{ label: 'FAQs', href: '/faqs/' },
 ];
 
 /** Strips a trailing slash so `/pricing/` and `/pricing` compare equal. */

@@ -7,9 +7,9 @@ const currentPath = normalisePath(Astro.url.pathname);
 
 <header class="header">
 	<div class="wrap navrow">
-		<a href="/" class="brand"><img src="/images/obii_logo.png" alt="OBII" /></a>
+		<a href="/" class="brand"><img src="/images/obii_logo.png" alt="OBII" width="750" height="201" /></a>
 		<nav class="navlinks" aria-label="Primary navigation">
-			{NAV_LINKS.map((link) => <a class={link.href === currentPath ? 'active' : ''} href={link.href}>{link.label}</a>)}
+			{NAV_LINKS.map((link) => <a class={normalisePath(link.href) === currentPath ? 'active' : ''} aria-current={normalisePath(link.href) === currentPath ? 'page' : undefined} href={link.href}>{link.label}</a>)}
 		</nav>
 		<div class="navactions">
 			<a class="signin" href={appLoginUrl}>Log in</a>

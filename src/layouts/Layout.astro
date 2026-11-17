@@ -1,30 +1,85 @@
 ---
+import {
+	DEFAULT_DESCRIPTION,
+	DEFAULT_OG_IMAGE,
+	DEFAULT_TITLE,
+	SITE_LOCALE,
+	SITE_NAME,
+	THEME_COLOR,
+	absoluteUrl,
+	organizationSchema,
+	websiteSchema,
+	type JsonLd,
+} from '../lib/seo';
+
 interface Props {
 	title?: string;
 	description?: string;
+	/** Keeps a page out of search results. */
+	noindex?: boolean;
+	/** Extra structured data for this page, added after the site-wide entries. */
+	jsonLd?: readonly JsonLd[];
+	/** Loads the additional font families used only by the archived homepage drafts. */
+	extraFonts?: boolean;
 }
 
+const BASE_FONTS = 'family=Inter:wght@100..900';
+const EXTRA_FONTS =
+	'family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700';
+
 const {
-	title = 'OBII — Expert investment intelligence',
-	description = 'Research expert market commentary, understand the reasoning and check the original source.',
+	title = DEFAULT_TITLE,
+	description = DEFAULT_DESCRIPTION,
+	noindex = false,
+	jsonLd = [],
+	extraFonts = false,
 } = Astro.props;
+
+const site = Astro.site ?? Astro.url;
+const canonicalUrl = absoluteUrl(Astro.url.pathname, site);
+const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE.path, site);
+const fontFamilies = extraFonts ? `${EXTRA_FONTS}&${BASE_FONTS}` : BASE_FONTS;
+const fontsUrl = `https://fonts.googleapis.com/css2?${fontFamilies}&display=swap`;
+const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+const structuredData = [organizationSchema(site), websiteSchema(site), ...jsonLd];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-AU">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<meta name="theme-color" content="#11105d" />
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content={robots} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="theme-color" content={THEME_COLOR} />
+
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:locale" content={SITE_LOCALE} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:width" content={String(DEFAULT_OG_IMAGE.width)} />
+		<meta property="og:image:height" content={String(DEFAULT_OG_IMAGE.height)} />
+		<meta property="og:image:alt" content={DEFAULT_OG_IMAGE.alt} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@100..900&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-			rel="stylesheet"
-		/>
+		<link href={fontsUrl} rel="stylesheet" />
+		{!noindex && <link rel="sitemap" href="/sitemap-index.xml" />}
+		{structuredData.map((entry) => <script is:inline type="application/ld+json" set:html={JSON.stringify(entry)} />)}
 	</head>
 	<body>
 		<slot />
