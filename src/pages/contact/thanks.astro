@@ -1,0 +1,13 @@
+---
+import SubPage from '../../layouts/SubPage.astro';
+
+const title = 'Message sent | OBII';
+const description = 'Thanks for getting in touch. The OBII team has your message and will be in touch.';
+---
+
+<SubPage title={title} description={description} noindex>
+	<section slot="hero" class="hero"><div class="wrap"><div class="eyebrow light">MESSAGE SENT</div>
+	<h1>Thanks. <em>We’ve got your message.</em></h1><p class="lede">The OBII team will be in touch by email. In the meantime, you can keep exploring.</p><div class="hero-actions"><a class="btn" href="/">Back to the homepage <span>→</span></a><a class="btn ghost" href="/faqs/">Read the FAQs</a></div>
+	</div>
+	</section>
+</SubPage>

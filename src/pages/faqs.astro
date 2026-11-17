@@ -1,14 +1,18 @@
 ---
 import SubPage from '../layouts/SubPage.astro';
 import { appRegisterUrl } from '../lib/app';
-import { SUPPORT_EMAIL, supportMailto } from '../lib/contact';
+import { CONTACT_PATH, SUPPORT_EMAIL, supportMailto } from '../lib/contact';
 import { FAQS } from '../data/faqs';
 import { faqSchema } from '../lib/seo';
 
 const title = "OBII FAQs | Membership, pricing and the free trial";
-/** Turns the support address inside an answer into a mail link. */
+const CONTACT_FORM_PHRASE = 'contact form';
+
+/** Links the contact form and the support address mentioned inside an answer. */
 function linkEmail(answer: string): string {
-	return answer.replace(SUPPORT_EMAIL, `<a href="${supportMailto}">${SUPPORT_EMAIL}</a>`);
+	return answer
+		.replace(CONTACT_FORM_PHRASE, `<a href="${CONTACT_PATH}">${CONTACT_FORM_PHRASE}</a>`)
+		.replace(SUPPORT_EMAIL, `<a href="${supportMailto}">${SUPPORT_EMAIL}</a>`);
 }
 
 const description = "Understand exactly what OBII does, what is free on ausbiz, what your membership includes and how the seven-day trial works.";
