@@ -2,9 +2,9 @@ export const SITE_NAME = 'OBII';
 export const SITE_URL = 'https://obii.ai';
 export const SITE_LOCALE = 'en_AU';
 export const THEME_COLOR = '#0a132a';
-export const DEFAULT_TITLE = 'OBII | Expert investment intelligence for ASX investors';
+export const DEFAULT_TITLE = 'OBII | Expert investment intelligence for investors';
 export const DEFAULT_DESCRIPTION =
-	'Research what real market experts said about the ASX shares you follow. Search ausbiz interviews, explore the reasoning and check the original source.';
+	'Research what real market experts said about the shares you follow. Search ausbiz interviews, explore the reasoning and check the original source.';
 export const DEFAULT_OG_IMAGE = { path: '/og-image.png', width: 1200, height: 630, alt: 'OBII: expert investment intelligence' };
 
 export type JsonLd = Record<string, unknown>;

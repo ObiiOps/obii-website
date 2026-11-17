@@ -164,3 +164,11 @@
 .faqitem summary:focus-visible{outline:2px solid #6c61eb;outline-offset:4px;border-radius:4px}
 .faqitem h4 span::before{content:'+'}
 .faqitem[open] h4 span::before{content:'\2212'}
+.storytop button.round-video{cursor:pointer;font-family:inherit;padding:0;transition:background .2s ease,transform .2s ease}
+.storytop button.round-video:hover{background:rgba(255,255,255,.26);transform:scale(1.05)}
+.storytop button.round-video:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.storytop.is-playing{height:auto;aspect-ratio:16/9;background:#000}
+.storytop.is-playing:before,.storytop.is-playing .titlewave,.storytop.is-playing .round-video{display:none}
+.storytop video{position:absolute;inset:0;width:100%;height:100%;background:#000}
+.storytop .episode-error{position:absolute;left:28px;right:28px;bottom:18px;z-index:2;color:#fff;font-size:12px;text-align:center}
+@media(prefers-reduced-motion:reduce){.storytop button.round-video{transition:none}.storytop button.round-video:hover{transform:none}}
