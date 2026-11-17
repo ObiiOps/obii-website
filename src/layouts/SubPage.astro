@@ -3,17 +3,29 @@ import Layout from './Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Motion from '../components/Motion.astro';
+import { NAV_LINKS, normalisePath } from '../lib/nav';
+import { breadcrumbSchema, type JsonLd } from '../lib/seo';
 import '../styles/site.css';
 
 interface Props {
 	title: string;
 	description: string;
+	/** Extra structured data for this page. */
+	jsonLd?: readonly JsonLd[];
+	/** Keeps a page out of search results. */
+	noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, jsonLd = [], noindex = false } = Astro.props;
+
+const currentPath = normalisePath(Astro.url.pathname);
+const currentLink = NAV_LINKS.find((link) => normalisePath(link.href) === currentPath);
+const breadcrumbs = currentLink
+	? [breadcrumbSchema([{ name: 'Home', path: '/' }, { name: currentLink.label, path: currentLink.href }], Astro.site)]
+	: [];
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} noindex={noindex} jsonLd={[...breadcrumbs, ...jsonLd]}>
 	<div class="topzone">
 		<SiteHeader />
 		<slot name="hero" />
