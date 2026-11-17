@@ -11,3 +11,5 @@ function appPath(path: string): string {
 
 export const appLoginUrl = appPath('/login');
 export const appRegisterUrl = appPath('/register');
+export const appTermsUrl = appPath('/terms-of-service');
+export const appPrivacyUrl = appPath('/privacy-policy');

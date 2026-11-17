@@ -1,5 +1,6 @@
 ---
-import { appLoginUrl } from '../lib/app';
+import { appLoginUrl, appPrivacyUrl, appTermsUrl } from '../lib/app';
+import { contactMailto } from '../lib/contact';
 import { NAV_LINKS } from '../lib/nav';
 ---
 
@@ -10,6 +11,9 @@ import { NAV_LINKS } from '../lib/nav';
 			<div class="footer-nav">
 				{NAV_LINKS.map((link) => <a href={link.href}>{link.label}</a>)}
 				<a href={appLoginUrl}>Log in</a>
+				<a href={appTermsUrl}>Terms</a>
+				<a href={appPrivacyUrl}>Privacy</a>
+				<a href={contactMailto}>Contact</a>
 			</div>
 		</div>
 		<p class="footer-legal">OBII helps independent investors research source-linked expert commentary. Content is general information, not personal financial advice.</p>
