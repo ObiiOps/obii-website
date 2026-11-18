@@ -1,4 +1,6 @@
 ---
+import Analytics from '../components/Analytics.astro';
+import { GSC_VERIFICATION_CODE } from '../lib/analytics';
 import {
 	DEFAULT_DESCRIPTION,
 	DEFAULT_OG_IMAGE,
@@ -54,6 +56,7 @@ const structuredData = [organizationSchema(site), websiteSchema(site), ...jsonLd
 		<meta name="robots" content={robots} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta name="theme-color" content={THEME_COLOR} />
+		{GSC_VERIFICATION_CODE && <meta name="google-site-verification" content={GSC_VERIFICATION_CODE} />}
 
 		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -80,6 +83,7 @@ const structuredData = [organizationSchema(site), websiteSchema(site), ...jsonLd
 		<link href={fontsUrl} rel="stylesheet" />
 		{!noindex && <link rel="sitemap" href="/sitemap-index.xml" />}
 		{structuredData.map((entry) => <script is:inline type="application/ld+json" set:html={JSON.stringify(entry)} />)}
+		<Analytics />
 	</head>
 	<body>
 		<slot />

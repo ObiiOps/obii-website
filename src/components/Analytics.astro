@@ -1,0 +1,22 @@
+---
+import { GTM_CONTAINER_ID, TRACKED_HOSTNAMES } from '../lib/analytics';
+---
+
+{
+	GTM_CONTAINER_ID && (
+		<script is:inline define:vars={{ containerId: GTM_CONTAINER_ID, trackedHostnames: TRACKED_HOSTNAMES }}>
+			if (trackedHostnames.includes(window.location.hostname)) {
+				window.dataLayer = window.dataLayer || [];
+				window.gtag = function gtag() {
+					window.dataLayer.push(arguments);
+				};
+				window.gtag('js', new Date());
+
+				const loader = document.createElement('script');
+				loader.async = true;
+				loader.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(containerId);
+				document.head.append(loader);
+			}
+		</script>
+	)
+}
