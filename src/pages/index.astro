@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Motion from '../components/Motion.astro';
 import { appLoginUrl, appPrivacyUrl, appRegisterUrl, appTermsUrl } from '../lib/app';
-import { contactMailto } from '../lib/contact';
+import { CONTACT_PATH } from '../lib/contact';
 import { NAV_LINKS } from '../lib/nav';
 import '../styles/home.css';
 
@@ -53,7 +53,7 @@ const EPISODE_TITLE = 'the call, 2 November 2026: BHP discussion on ausbiz';
 <p>No. OBII provides general expert commentary and source-linked research information, not personalised financial advice.</p></details></div></div></section>
 <section class="finalcta"><div class="wrap final-grid"><div><div class="eyebrow light">REAL PEOPLE. ORIGINAL SOURCES.</div><h2>You’ve done the work to build your portfolio. Make the research count.</h2><p>Find the commentary. Explore the thinking. Check the original source.</p></div><div><a class="btn" href={appRegisterUrl}>Try OBII free for 7 days <span>→</span></a><div class="ctafoot">No credit card required to start.</div></div></div></section>
 </main>
-<footer class="footer"><div class="wrap"><div class="footerinner"><img alt="OBII" src="/images/obii_logo.png" width="750" height="201" loading="lazy" decoding="async"/><div class="footerlinks"><span><a href="/how-it-works/">How it works</a></span><span><a href="/experts/">Experts</a></span><span><a href="/companies/">Companies</a></span><span><a href="/pricing/">Pricing</a></span><span><a href="/faqs/">FAQs</a></span><span><a href={appTermsUrl}>Terms</a></span><span><a href={appPrivacyUrl}>Privacy</a></span><span><a href={contactMailto}>Contact</a></span></div><div class="ausbizchip"><img alt="ausbiz" src="/images/ausbiz_logo.png"/></div></div></div></footer>
+<footer class="footer"><div class="wrap"><div class="footerinner"><img alt="OBII" src="/images/obii_logo.png" width="750" height="201" loading="lazy" decoding="async"/><div class="footerlinks"><span><a href="/how-it-works/">How it works</a></span><span><a href="/experts/">Experts</a></span><span><a href="/companies/">Companies</a></span><span><a href="/pricing/">Pricing</a></span><span><a href="/faqs/">FAQs</a></span><span><a href={appTermsUrl}>Terms</a></span><span><a href={appPrivacyUrl}>Privacy</a></span><span><a href={CONTACT_PATH}>Contact</a></span></div><div class="ausbizchip"><img alt="ausbiz" src="/images/ausbiz_logo.png"/></div></div></div></footer>
 <div class="mobile-cta"><span>7-day free trial<br/><small style="font-weight:500;color:#69728d">No card required</small></span><a class="btn" href={appRegisterUrl}>Try OBII free <span>→</span></a></div>
 </Layout>
 

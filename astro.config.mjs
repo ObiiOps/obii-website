@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
 const SITE_URL = 'https://obii.ai';
-const UNLISTED_PATHS = ['/version1/', '/version2/'];
+const UNLISTED_PATHS = ['/version1/', '/version2/', '/contact/thanks/'];
 
 // https://astro.build/config
 export default defineConfig({
