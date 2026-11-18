@@ -33,3 +33,8 @@ main{background:white}.section{padding:85px 0}.section.alt{background:linear-gra
 .faq-aside .contact-email{font-size:14px}
 @media(max-width:760px){.contact-form{padding:22px 18px}}
 .contact-form~.faq-aside{order:0}
+/* Pages with nothing between the hero and the footer: fill the screen so no white shows under the footer. */
+body:has(.topzone+.ftr){min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.topzone:has(+.ftr){flex:1}
+/* The supplied portraits are cut-outs with partly transparent edges: keep them on white. */
+img[src$="/images/nadine.png"],img[src$="/images/kochie.png"]{background:#fff}
