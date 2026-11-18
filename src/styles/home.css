@@ -172,3 +172,5 @@
 .storytop video{position:absolute;inset:0;width:100%;height:100%;background:#000}
 .storytop .episode-error{position:absolute;left:28px;right:28px;bottom:18px;z-index:2;color:#fff;font-size:12px;text-align:center}
 @media(prefers-reduced-motion:reduce){.storytop button.round-video{transition:none}.storytop button.round-video:hover{transform:none}}
+/* The supplied portraits are cut-outs with partly transparent edges: keep them on white. */
+img[src$="/images/nadine.png"],img[src$="/images/kochie.png"]{background:#fff}

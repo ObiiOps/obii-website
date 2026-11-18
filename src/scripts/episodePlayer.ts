@@ -51,7 +51,19 @@ function setUpPlayer(player: HTMLElement): void {
 
 		// The click allows playback with sound. If the browser still refuses, the controls stay available.
 		video.play().catch(() => undefined);
+		pauseWhenOutOfView(player, video);
 	});
+}
+
+/** Stops playback once the visitor scrolls the player off screen. They press play to resume. */
+function pauseWhenOutOfView(player: HTMLElement, video: HTMLVideoElement): void {
+	if (!('IntersectionObserver' in window)) return;
+
+	const observer = new IntersectionObserver((entries) => {
+		const isOutOfView = entries.some((entry) => !entry.isIntersecting);
+		if (isOutOfView && !video.paused) video.pause();
+	});
+	observer.observe(player);
 }
 
 export function initEpisodePlayers(): void {
