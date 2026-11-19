@@ -20,7 +20,7 @@ const description = "Understand exactly what OBII does, what is free on ausbiz, 
 
 <SubPage title={title} description={description} jsonLd={[faqSchema(FAQS)]}>
 	<section slot="hero" class="hero"><div class="wrap hero-grid"><div><div class="eyebrow light">FREQUENTLY ASKED QUESTIONS</div>
-	<h1>Your questions. <em>Clear answers.</em></h1><p class="lede">Understand exactly what OBII does, what is free on ausbiz, what your membership includes and how the seven-day trial works.</p><div class="hero-actions"><a class="btn" href={appRegisterUrl}>Try OBII free for 7 days <span>→</span></a><a class="btn ghost" href="/">Explore OBII</a></div>
+	<h1>Your questions. <em>Clear answers.</em></h1><p class="lede">Understand exactly what OBII does, what is free on ausbiz, what your membership includes and how the seven-day trial works.</p><div class="hero-actions"><a class="btn" href={appRegisterUrl} data-cta-purpose="start_trial" data-cta-placement="feature_hero">Try OBII free for 7 days <span>→</span></a><a class="btn ghost" href="/">Explore OBII</a></div>
 	<p class="promise">7 days free · No credit card required · Your choice to subscribe</p><div class="mini-proof"><span>Real expert perspectives</span><span>Original sources</span><span>Your decision</span></div>
 	</div>
 	<div class="hero-art"><div class="panel"><div class="panelhead"><span class="chip">COMMON QUESTIONS</span><span class="tiny">Clear answers</span></div>
@@ -41,11 +41,11 @@ const description = "Understand exactly what OBII does, what is free on ausbiz, 
 	))}
 	</div>
 	<aside class="faq-aside"><div class="eyebrow">TRY FIRST</div>
-	<h3>Seven days to explore OBII.</h3><p>No credit card required. Follow a company or expert, explore source-linked commentary and decide whether you want to keep going.</p><a class="btn" href={appRegisterUrl} style="width:100%;font-size:12px">Try OBII free →</a><p style="margin-top:19px"><a style="color:#5b50e0;font-weight:750" href="/pricing/">Compare Standard and Pro →</a></p></aside></div>
+	<h3>Seven days to explore OBII.</h3><p>No credit card required. Follow a company or expert, explore source-linked commentary and decide whether you want to keep going.</p><a class="btn" href={appRegisterUrl} data-cta-purpose="start_trial" data-cta-placement="faq" data-cta-plan="free_trial" style="width:100%;font-size:12px">Try OBII free →</a><p style="margin-top:19px"><a style="color:#5b50e0;font-weight:750" href="/pricing/" data-cta-purpose="compare_plans" data-cta-placement="faq">Compare Standard and Pro →</a></p></aside></div>
 	</div>
 	</section>
 	<section class="section small"><div class="wrap"><div class="cta-panel"><div><h2>Still curious? Start with a share you follow.</h2><p>Start with a company you follow. Explore the expert thinking and original sources before choosing a paid plan.</p></div>
-	<a class="btn" href={appRegisterUrl}>Try OBII free for 7 days →</a></div>
+	<a class="btn" href={appRegisterUrl} data-cta-purpose="start_trial" data-cta-placement="closing_band">Try OBII free for 7 days →</a></div>
 	</div>
 	</section>
 	</main>

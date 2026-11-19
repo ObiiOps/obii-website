@@ -1,0 +1,402 @@
+---
+import {
+	APP_WEB_ORIGIN,
+	LEGACY_BRAND_AUSBIZPLUS,
+	LEGACY_FROM_BRAND_QUERY_PARAM,
+	MARKETING_SITE_SUPER_PROPERTIES,
+	MARKETING_UTMS_SESSION_STORAGE_KEY,
+	POSTHOG_API_HOST,
+	POSTHOG_CROSS_DOMAIN_QUERY_KEYS,
+	REFERRAL_QUERY_PARAM_KEYS,
+	UTM_QUERY_PARAM_KEYS,
+} from '../lib/posthog/config';
+---
+
+<script
+	is:inline
+	define:vars={{
+		apiKey: import.meta.env.PUBLIC_POSTHOG_PROJECT_TOKEN,
+		apiHost: POSTHOG_API_HOST,
+		isDevelopment: import.meta.env.DEV,
+		marketingSiteProps: MARKETING_SITE_SUPER_PROPERTIES,
+		referralParamKeys: REFERRAL_QUERY_PARAM_KEYS,
+		appWebOrigin: APP_WEB_ORIGIN,
+		crossDomainKeys: POSTHOG_CROSS_DOMAIN_QUERY_KEYS,
+		utmParamKeys: UTM_QUERY_PARAM_KEYS,
+		marketingUtmsStorageKey: MARKETING_UTMS_SESSION_STORAGE_KEY,
+		legacyFromBrandParam: LEGACY_FROM_BRAND_QUERY_PARAM,
+		legacyBrandAusbizplus: LEGACY_BRAND_AUSBIZPLUS,
+	}}
+>
+	if (!apiKey) {
+		if (isDevelopment) {
+			throw new Error(
+				'PUBLIC_POSTHOG_PROJECT_TOKEN variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once PUBLIC_POSTHOG_PROJECT_TOKEN is configured',
+			);
+		}
+	} else {
+		!(function (t, e) {
+			var o, n, p, r;
+			e.__SV ||
+				((window.posthog = e),
+				(e._i = []),
+				(e.init = function (i, s, a) {
+					function g(t, e) {
+						var o = e.split('.');
+						2 == o.length && ((t = t[o[0]]), (e = o[1])),
+							(t[e] = function () {
+								t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+							});
+					}
+					((p = t.createElement('script')).type = 'text/javascript'),
+						(p.crossOrigin = 'anonymous'),
+						(p.async = !0),
+						(p.src = s.api_host + '/static/array.js'),
+						(r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r);
+					var u = e;
+					for (
+						void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+							u.people = u.people || [],
+							Object.defineProperty(u, 'toString', {
+								configurable: !0,
+								enumerable: !0,
+								writable: !0,
+								value: function (t) {
+									var e = 'posthog';
+									return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e;
+								},
+							}),
+							Object.defineProperty(u.people, 'toString', {
+								configurable: !0,
+								enumerable: !0,
+								writable: !0,
+								value: function () {
+									return u.toString(1) + '.people (stub)';
+								},
+							}),
+							o = 'capture identify alias people.set people.set_once set_config register register_once register_for_session unregister unregister_for_session opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId get_distinct_id get_session_id'.split(
+								' ',
+							),
+							n = 0;
+						n < o.length;
+						n++
+					)
+						g(u, o[n]);
+					e._i.push([i, s, a]);
+				}),
+				(e.__SV = 1));
+		})(document, window.posthog || []);
+
+		posthog.init(apiKey, {
+			api_host: apiHost,
+			defaults: '2025-05-24',
+			capture_exceptions: {
+				capture_unhandled_errors: true,
+				capture_unhandled_rejections: true,
+				capture_console_errors: false,
+			},
+			tracing_headers: [window.location.hostname],
+			logs: {
+				serviceName: 'marketing-site',
+				environment: isDevelopment ? 'development' : 'production',
+				serviceVersion: '0.0.1',
+			},
+		});
+
+		posthog.register(marketingSiteProps);
+		persistMarketingUtms();
+		handleLegacyBrandRedirect();
+
+		var referralAttribution = readReferralAttribution(referralParamKeys);
+		if (referralAttribution.referral_code) {
+			posthog.register_once({
+				initial_referral_code: referralAttribution.referral_code,
+				initial_referral_param: referralAttribution.referral_param,
+			});
+			posthog.register_for_session({
+				referral_code: referralAttribution.referral_code,
+				referral_param: referralAttribution.referral_param,
+			});
+			posthog.capture('marketing_referral_landing', {
+				referral_code: referralAttribution.referral_code,
+				referral_param: referralAttribution.referral_param,
+				landing_path: window.location.pathname,
+				landing_url: window.location.href,
+			});
+		}
+
+		posthog.onSessionId(function () {
+			decorateAllAppLinks(document);
+		});
+	}
+
+	function handleLegacyBrandRedirect() {
+		if (!window.posthog) return;
+		var params = new URLSearchParams(location.search);
+		var fromBrand = params.get(legacyFromBrandParam);
+		if (fromBrand === legacyBrandAusbizplus) {
+			posthog.register_once({ legacy_brand: fromBrand });
+			posthog.register_for_session({ legacy_redirect: true });
+			posthog.capture('legacy_brand_redirect_landing', {
+				from_brand: fromBrand,
+				landing_path: location.pathname,
+			});
+			params.delete(legacyFromBrandParam);
+			var qs = params.toString();
+			history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+		}
+	}
+
+	function persistMarketingUtms() {
+		var params = new URLSearchParams(window.location.search);
+		var stored = readMarketingUtms();
+		var changed = false;
+		for (var i = 0; i < utmParamKeys.length; i += 1) {
+			var key = utmParamKeys[i];
+			var value = params.get(key);
+			if (value && value.trim()) {
+				stored[key] = value.trim();
+				changed = true;
+			}
+		}
+		if (changed) {
+			try {
+				sessionStorage.setItem(marketingUtmsStorageKey, JSON.stringify(stored));
+			} catch {
+				/* ignore quota / privacy mode */
+			}
+		}
+	}
+
+	function readMarketingUtms() {
+		try {
+			var raw = sessionStorage.getItem(marketingUtmsStorageKey);
+			if (!raw) return {};
+			var parsed = JSON.parse(raw);
+			return parsed && typeof parsed === 'object' ? parsed : {};
+		} catch {
+			return {};
+		}
+	}
+
+	function readReferralAttribution(paramKeys) {
+		var params = new URLSearchParams(window.location.search);
+		for (var i = 0; i < paramKeys.length; i += 1) {
+			var key = paramKeys[i];
+			var value = params.get(key);
+			if (value && value.trim()) {
+				return { referral_code: value.trim(), referral_param: key };
+			}
+		}
+		return { referral_code: null, referral_param: null };
+	}
+
+	function isTrackableHref(href) {
+		if (!href) return false;
+		var trimmed = href.trim();
+		if (!trimmed || trimmed === '#' || trimmed.startsWith('#')) return false;
+		if (trimmed.startsWith('mailto:') || trimmed.startsWith('tel:')) return false;
+		return true;
+	}
+
+	function resolveLinkUrl(anchor) {
+		try {
+			return new URL(anchor.getAttribute('href') || '', window.location.href);
+		} catch {
+			return null;
+		}
+	}
+
+	function isAppUrl(url) {
+		if (!url || !appWebOrigin) return false;
+		if (url.protocol !== 'http:' && url.protocol !== 'https:') return false;
+		try {
+			return new URL(appWebOrigin).origin === url.origin;
+		} catch {
+			return url.origin === appWebOrigin;
+		}
+	}
+
+	function inferAppCtaPurpose(url) {
+		if (!isAppUrl(url)) return null;
+		var path = (url.pathname || '/').replace(/\/+$/, '') || '/';
+		if (path === '/login') return null;
+		if (path === '/register' || path.indexOf('/register/') === 0) return 'start_trial';
+		if (path === '/pricing' || path.indexOf('/pricing/') === 0) return 'subscribe';
+		return 'app_link';
+	}
+
+	function decorateAppUrl(rawHref) {
+		if (!apiKey || !window.posthog) return rawHref;
+		var url;
+		try {
+			url = new URL(rawHref, window.location.href);
+		} catch {
+			return rawHref;
+		}
+		if (!isAppUrl(url)) return rawHref;
+
+		var ph = window.posthog;
+		var distinctId = typeof ph.get_distinct_id === 'function' ? ph.get_distinct_id() : undefined;
+		var sessionId = typeof ph.get_session_id === 'function' ? ph.get_session_id() : undefined;
+		if (distinctId) url.searchParams.set(crossDomainKeys.distinctId, distinctId);
+		if (sessionId) url.searchParams.set(crossDomainKeys.sessionId, sessionId);
+
+		var utms = readMarketingUtms();
+		for (var u = 0; u < utmParamKeys.length; u += 1) {
+			var utmKey = utmParamKeys[u];
+			if (utms[utmKey] && !url.searchParams.has(utmKey)) {
+				url.searchParams.set(utmKey, utms[utmKey]);
+			}
+		}
+		var currentParams = new URLSearchParams(window.location.search);
+		for (var c = 0; c < utmParamKeys.length; c += 1) {
+			var currentKey = utmParamKeys[c];
+			var currentVal = currentParams.get(currentKey);
+			if (currentVal) url.searchParams.set(currentKey, currentVal);
+		}
+
+		return url.toString();
+	}
+
+	function decorateAppAnchor(anchor) {
+		if (!(anchor instanceof HTMLAnchorElement)) return;
+		var href = anchor.getAttribute('href');
+		if (!isTrackableHref(href)) return;
+		var decorated = decorateAppUrl(href);
+		if (decorated && decorated !== href) {
+			anchor.setAttribute('href', decorated);
+		}
+	}
+
+	function decorateAllAppLinks(root) {
+		if (!(root instanceof Element || root instanceof Document)) return;
+		root.querySelectorAll('a[href]').forEach(function (node) {
+			decorateAppAnchor(node);
+		});
+	}
+
+	function isOutboundUrl(url) {
+		if (!url) return false;
+		if (url.protocol !== 'http:' && url.protocol !== 'https:') return false;
+		return url.hostname !== window.location.hostname;
+	}
+
+	function linkClickContext() {
+		return {
+			page_path: window.location.pathname,
+			page_url: window.location.href,
+		};
+	}
+
+	function normalizeLinkLabel(anchor) {
+		return (anchor.textContent || '')
+			.replace(/\s+/g, ' ')
+			.replace(/\s*↗\s*$/, '')
+			.trim();
+	}
+
+	function newTabFromClick(anchor, event) {
+		return (
+			anchor.getAttribute('target') === '_blank' ||
+			event.metaKey ||
+			event.ctrlKey ||
+			event.shiftKey ||
+			event.button === 1
+		);
+	}
+
+	document.addEventListener('click', decorateAppLinkBeforeNavigate, true);
+	document.addEventListener('auxclick', decorateAppLinkBeforeNavigate, true);
+
+	function decorateAppLinkBeforeNavigate(event) {
+		var target = event.target;
+		if (!(target instanceof Element)) return;
+		var el = target.closest('a[href]');
+		if (el instanceof HTMLAnchorElement) decorateAppAnchor(el);
+	}
+
+	document.addEventListener('DOMContentLoaded', function () {
+		persistMarketingUtms();
+		decorateAllAppLinks(document);
+		if (document.body) {
+			new MutationObserver(function (mutations) {
+				mutations.forEach(function (mutation) {
+					mutation.addedNodes.forEach(function (node) {
+						if (node instanceof HTMLAnchorElement) {
+							decorateAppAnchor(node);
+						} else if (node instanceof Element) {
+							decorateAllAppLinks(node);
+						}
+					});
+				});
+			}).observe(document.body, { childList: true, subtree: true });
+		}
+	});
+
+	document.addEventListener('click', captureMarketingLinkClick);
+	document.addEventListener('auxclick', captureMarketingLinkClick);
+
+	function isClickTrackableHref(href, hasCtaPurpose) {
+		if (!href) return false;
+		var trimmed = href.trim();
+		if (!trimmed || trimmed.startsWith('mailto:') || trimmed.startsWith('tel:')) return false;
+		if (hasCtaPurpose && (trimmed === '#' || trimmed.startsWith('#'))) return true;
+		return isTrackableHref(href);
+	}
+
+	function captureMarketingLinkClick(event) {
+		var target = event.target;
+		if (!(target instanceof Element)) return;
+		var el = target.closest('a[href]');
+		if (!(el instanceof HTMLAnchorElement)) return;
+		var purposeAttr = el.getAttribute('data-cta-purpose');
+		if (!isClickTrackableHref(el.getAttribute('href'), Boolean(purposeAttr))) return;
+
+		var isMiddleClick = event.type === 'auxclick';
+		if (isMiddleClick) {
+			if (event.button !== 1) return;
+		} else if (event.button !== 0) {
+			return;
+		}
+
+		var linkUrl = resolveLinkUrl(el);
+		var outbound = isOutboundUrl(linkUrl);
+		var opensNewTab = newTabFromClick(el, event);
+		var purpose = purposeAttr;
+		var inferredPurpose = !purpose ? inferAppCtaPurpose(linkUrl) : null;
+		var effectivePurpose = purpose || inferredPurpose;
+		var context = linkClickContext();
+
+		if (effectivePurpose) {
+			var plan = el.getAttribute('data-cta-plan');
+			var feature = el.getAttribute('data-cta-feature');
+			var label = normalizeLinkLabel(el);
+
+			window.posthog?.capture('cta_clicked', {
+				...context,
+				purpose: effectivePurpose,
+				placement: el.getAttribute('data-cta-placement') || undefined,
+				label: label || undefined,
+				destination: el.getAttribute('href') || undefined,
+				link_type: outbound ? 'outbound' : 'internal',
+				...(opensNewTab ? { new_tab: true } : {}),
+				...(plan ? { plan } : {}),
+				...(feature ? { feature } : {}),
+				...(inferredPurpose ? { cta_inferred: true } : {}),
+			});
+			return;
+		}
+
+		if (outbound || opensNewTab) {
+			window.posthog?.capture('outbound_link_clicked', {
+				...context,
+				destination: el.getAttribute('href') || undefined,
+				label: normalizeLinkLabel(el) || undefined,
+				outbound,
+				new_tab: opensNewTab,
+				untagged: true,
+			});
+		}
+	}
+</script>

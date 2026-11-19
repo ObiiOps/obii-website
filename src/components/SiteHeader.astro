@@ -12,13 +12,13 @@ const currentPath = normalisePath(Astro.url.pathname);
 			{NAV_LINKS.map((link) => <a class={normalisePath(link.href) === currentPath ? 'active' : ''} aria-current={normalisePath(link.href) === currentPath ? 'page' : undefined} href={link.href}>{link.label}</a>)}
 		</nav>
 		<div class="navactions">
-			<a class="signin" href={appLoginUrl}>Log in</a>
-			<a class="btn small" href={appRegisterUrl}>Try OBII free for 7 days <span>→</span></a>
+			<a class="signin" href={appLoginUrl} data-cta-purpose="log_in" data-cta-placement="nav">Log in</a>
+			<a class="btn small" href={appRegisterUrl} data-cta-purpose="start_trial" data-cta-placement="nav">Try OBII free for 7 days <span>→</span></a>
 			<details class="menu">
 				<summary aria-label="Open menu">☰</summary>
 				<div class="menu-panel">
 					{NAV_LINKS.map((link) => <a href={link.href}>{link.label}</a>)}
-					<a href={appLoginUrl}>Log in</a>
+					<a href={appLoginUrl} data-cta-purpose="log_in" data-cta-placement="nav_mobile">Log in</a>
 				</div>
 			</details>
 		</div>
