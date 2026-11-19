@@ -1,5 +1,8 @@
 import { APP_WEB_ORIGIN } from '../app';
 
+/** EU Cloud ingest — shared with legacy ausbiz+ marketing site and investors app. */
+export const POSTHOG_API_HOST = 'https://eu.i.posthog.com';
+
 export const BRAND_SUPER_PROPERTY = 'brand';
 export const BRAND_VALUE = 'brand_obii';
 
