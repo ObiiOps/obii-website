@@ -2,7 +2,9 @@ function normalizeRoot(url: string | undefined): string {
 	return (url ?? '').replace(/\/$/, '');
 }
 
-const appRoot = normalizeRoot(import.meta.env.PUBLIC_APP_ROOT_URL);
+export const APP_WEB_ORIGIN = normalizeRoot(import.meta.env.PUBLIC_APP_ROOT_URL);
+
+const appRoot = APP_WEB_ORIGIN;
 
 function appPath(path: string): string {
 	const segment = path.startsWith('/') ? path : `/${path}`;
