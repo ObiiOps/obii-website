@@ -5,6 +5,11 @@
 export const GTM_CONTAINER_ID = 'GTM-MJWMM9VG';
 
 /**
+ * Meta (Facebook and Instagram) pixel ID. Leave empty to switch the pixel off.
+ */
+export const META_PIXEL_ID = '2575023732979543';
+
+/**
  * Google Search Console verification code: the `content` value of the
  * `google-site-verification` meta tag. Leave empty to omit the tag.
  */
