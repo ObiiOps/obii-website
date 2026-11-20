@@ -1,5 +1,6 @@
 ---
 import Analytics from '../components/Analytics.astro';
+import MetaPixel from '../components/MetaPixel.astro';
 import PostHog from '../components/PostHog.astro';
 import { GSC_VERIFICATION_CODE } from '../lib/analytics';
 import {
@@ -85,6 +86,7 @@ const structuredData = [organizationSchema(site), websiteSchema(site), ...jsonLd
 		{!noindex && <link rel="sitemap" href="/sitemap-index.xml" />}
 		{structuredData.map((entry) => <script is:inline type="application/ld+json" set:html={JSON.stringify(entry)} />)}
 		<Analytics />
+		<MetaPixel />
 		<PostHog />
 	</head>
 	<body>
