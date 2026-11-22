@@ -26,6 +26,14 @@ import { META_PIXEL_ID, TRACKED_HOSTNAMES } from '../lib/analytics';
 
 				window.fbq('init', pixelId);
 				window.fbq('track', 'PageView');
+
+				// Free trial buttons send visitors to the app, so record the click before they leave.
+				document.addEventListener('click', (event) => {
+					const target = event.target instanceof Element ? event.target : null;
+					const trialLink = target ? target.closest('[data-cta-purpose="start_trial"]') : null;
+					if (!trialLink) return;
+					window.fbq('trackCustom', 'TrialCtaClick', { placement: trialLink.dataset.ctaPlacement || 'unknown' });
+				});
 			}
 		</script>
 	)
