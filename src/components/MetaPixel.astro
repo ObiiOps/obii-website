@@ -1,10 +1,10 @@
 ---
-import { META_PIXEL_ID, TRACKED_HOSTNAMES } from '../lib/analytics';
+import { META_PIXEL_IDS, TRACKED_HOSTNAMES } from '../lib/analytics';
 ---
 
 {
-	META_PIXEL_ID && (
-		<script is:inline define:vars={{ pixelId: META_PIXEL_ID, trackedHostnames: TRACKED_HOSTNAMES }}>
+	META_PIXEL_IDS.length > 0 && (
+		<script is:inline define:vars={{ pixelIds: META_PIXEL_IDS, trackedHostnames: TRACKED_HOSTNAMES }}>
 			if (trackedHostnames.includes(window.location.hostname)) {
 				// Meta's standard base code: queues calls until fbevents.js has loaded.
 				!(function (f, b, e, v, n, t, s) {
@@ -24,7 +24,7 @@ import { META_PIXEL_ID, TRACKED_HOSTNAMES } from '../lib/analytics';
 					s.parentNode.insertBefore(t, s);
 				})(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-				window.fbq('init', pixelId);
+				pixelIds.forEach((pixelId) => window.fbq('init', pixelId));
 				window.fbq('track', 'PageView');
 
 				// Free trial buttons send visitors to the app, so record the click before they leave.
