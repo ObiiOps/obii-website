@@ -4,10 +4,15 @@
  */
 export const GTM_CONTAINER_ID = 'GTM-MJWMM9VG';
 
+const OBII_META_PIXEL_ID = '2575023732979543';
+/** The ausbiz ad account runs ads that link to this site, so its pixel measures them too. */
+const AUSBIZ_META_PIXEL_ID = '1375195872807551';
+
 /**
- * Meta (Facebook and Instagram) pixel ID. Leave empty to switch the pixel off.
+ * Meta (Facebook and Instagram) pixel IDs. Every pixel receives the same events.
+ * Leave the list empty to switch the pixels off.
  */
-export const META_PIXEL_ID = '2575023732979543';
+export const META_PIXEL_IDS: readonly string[] = [OBII_META_PIXEL_ID, AUSBIZ_META_PIXEL_ID];
 
 /**
  * Google Search Console verification code: the `content` value of the
